@@ -11,22 +11,26 @@ $app = new \Slim\Slim();
 
 $app->config('debug', true);
 
-$app->get('/', function() { // Puxa página inicial 
+$app->get('/', function() { // Redireciona para o admin
     
-    $page = new Page();
-    $page->setTpl('users.html');
+    header("Location: /admin");
+
+    exit;
 
 });
 
 $app->get('/admin', function() {  // Puxa Página inicial após login
+    
     User::verifyLogin();
-    $user = new User();
     $page = new Page();
+    $fat = Faturamento::ticketMedio(30);
+    $page->assign('data',$fat);
     $page->setTpl('index.html');
 
 });
 
 $app->get('/admin/login', function() { // Puxa Página login
+    
     $page = new Page([
         "header"=>false,
         "footer"=>false
@@ -55,6 +59,13 @@ $app->get('/admin/faturamento/update', function() { // Puxa página criar novo u
     User::verifyLogin();
     $page = new Page();
     $page->setTpl('faturamento-update.html');
+
+});
+
+$app->get('/admin/faturamento/relatorio', function() { // Puxa página faturamento relatorio
+    User::verifyLogin();
+    $page = new Page();
+    $page->setTpl('chartjs.html');
 
 });
 
@@ -93,7 +104,7 @@ $app->get('/admin/faturamento/create', function() { // Puxa página para criar f
     exit;
 });
 
-$app->get('/admin/faturamento', function() { // Puxa página para criar faturamento
+$app->get('/admin/faturamento', function() { // Puxa página faturamento
     
     User::verifyLogin();
 

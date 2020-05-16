@@ -46,6 +46,21 @@ class Faturamento {
         ));
     }
 
+    public static function ticketMedio($dias) {
+
+        $sql = new Sql();
+
+        $results = $sql->select("SELECT (SUM(valor)/SUM(pratos)) FROM `faturamento` WHERE data BETWEEN DATE_ADD(CURRENT_DATE(), INTERVAL -:dias DAY) AND CURRENT_DATE()",array(
+            ":dias"=>$dias
+        ));
+
+        $data = $results[0];
+
+        return $data;
+        
+
+    }
+
     public function getId() {
         return $this->id;
     }

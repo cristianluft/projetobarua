@@ -3,14 +3,28 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Page Header
-        <small>Optional description</small>
+        Dashboard
       </h1>
     </section>
 
     <!-- Main content -->
     <section class="content">
-
+      <div class="row">
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-aqua">
+            <div class="inner">
+              {foreach $data as $item}
+              <h3>R$ {$item}</h3>
+              {/foreach}
+              <p>Ticket médio</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+          </div>
+        </div>
+    </div>
       <!-- Your Page Content Here -->
 
     </section>
