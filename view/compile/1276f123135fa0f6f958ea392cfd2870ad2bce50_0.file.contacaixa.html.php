@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.36, created on 2020-05-18 19:10:24
-  from 'C:\xampp\htdocs\projetobarua\view\users.html' */
+/* Smarty version 3.1.36, created on 2020-05-20 01:23:24
+  from 'C:\xampp\htdocs\projetobarua\view\contacaixa.html' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.36',
-  'unifunc' => 'content_5ec2c180dca182_92551022',
+  'unifunc' => 'content_5ec46a6cf03f72_34042771',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    '73941c03e32de111727fc1888a4129a02cee43de' => 
+    '1276f123135fa0f6f958ea392cfd2870ad2bce50' => 
     array (
-      0 => 'C:\\xampp\\htdocs\\projetobarua\\view\\users.html',
-      1 => 1589812251,
+      0 => 'C:\\xampp\\htdocs\\projetobarua\\view\\contacaixa.html',
+      1 => 1589930454,
       2 => 'file',
     ),
   ),
@@ -20,37 +20,40 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ec2c180dca182_92551022 (Smarty_Internal_Template $_smarty_tpl) {
-?><!-- Content Wrapper. Contains page content -->
+function content_5ec46a6cf03f72_34042771 (Smarty_Internal_Template $_smarty_tpl) {
+?>
+
+
+<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    Lista de Usuários
+    Contas Caixa
   </h1>
 </section>
 
 <!-- Main content -->
 <section class="content">
-
+  
   <div class="row">
+    
   	<div class="col-md-12">
+      
   		<div class="box box-primary">
-            
-            <div class="box-header">
-              <a href="/admin/usuarios/create" class="btn btn-success">Cadastrar Usuário</a>
-            </div>
+          <!-- /.input group -->
+          <div class="box-header">
+            <a href="/admin/contacaixa/create" class="btn btn-success">Cadastrar Conta Caixa</a>
+          </div>
 
             <div class="box-body no-padding">
               <table class="table table-striped">
                 <thead>
                   <tr>
-                    <th style="width: 10px">#</th>
-                    <th>Nome</th>
-                    <th>Login</th>
-                    <th>Senha</th>
-                    <th style="width: 60px">Ativo</th>
-                    <th style="width: 140px">&nbsp;</th>
+                    <th style="width: 80px">#</th>
+                    <th>Descrição</th>
+                    <th>Categoria</th>
+                    <th style="width: 200px">&nbsp;</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -61,23 +64,16 @@ if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['key']->value => 
 $_smarty_tpl->tpl_vars['item']->do_else = false;
 ?>
                   <tr>
-                    
                     <td><?php echo $_smarty_tpl->tpl_vars['item']->value['id'];?>
 </td>
                     <td><?php echo $_smarty_tpl->tpl_vars['item']->value['nome'];?>
 </td>
-                    <td><?php echo $_smarty_tpl->tpl_vars['item']->value['login'];?>
+                    <td><?php echo $_smarty_tpl->tpl_vars['item']->value['descricao'];?>
 </td>
-                    <td><?php echo $_smarty_tpl->tpl_vars['item']->value['senha'];?>
-</td>
-                    <td><?php if ($_smarty_tpl->tpl_vars['item']->value['ativo'] == 1) {?>Sim<?php } else { ?>Não<?php }?></td>
                     <td>
-                      <a href="/admin/usuarios/<?php echo $_smarty_tpl->tpl_vars['item']->value['id'];?>
+                      <a href="/admin/contacaixa/<?php echo $_smarty_tpl->tpl_vars['item']->value['id'];?>
 " class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Editar</a>
-                      <a href="/admin/usuarios/<?php echo $_smarty_tpl->tpl_vars['item']->value['id'];?>
-/delete" onclick="return confirm('Deseja realmente excluir este registro?')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Excluir</a>
                     </td>
-                    
                   </tr>
                   <?php
 }
@@ -92,5 +88,24 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 </section>
 <!-- /.content -->
 </div>
-<!-- /.content-wrapper --><?php }
+<!-- /.content-wrapper -->
+<?php echo '<script'; ?>
+ src="/res/admin/bootstrap/js/moment.min.js"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ src="/res/admin/bootstrap/js/daterangepicker.js"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ src="/res/admin/bootstrap/js/bootstrap-datepicker.min.js"><?php echo '</script'; ?>
+>
+
+<?php echo '<script'; ?>
+>
+  $(function () {
+
+})
+<?php echo '</script'; ?>
+>
+
+<?php }
 }

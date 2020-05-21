@@ -1,0 +1,67 @@
+
+
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    Contas Caixa
+  </h1>
+</section>
+
+<!-- Main content -->
+<section class="content">
+  
+  <div class="row">
+    
+  	<div class="col-md-12">
+      
+  		<div class="box box-primary">
+          <!-- /.input group -->
+          <div class="box-header">
+            <a href="/admin/contacaixa/create" class="btn btn-success">Cadastrar Conta Caixa</a>
+          </div>
+
+            <div class="box-body no-padding">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th style="width: 80px">#</th>
+                    <th>Descrição</th>
+                    <th>Categoria</th>
+                    <th style="width: 200px">&nbsp;</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {foreach from=$data item=item key=key}
+                  <tr>
+                    <td>{$item.id}</td>
+                    <td>{$item.nome}</td>
+                    <td>{$item.descricao}</td>
+                    <td>
+                      <a href="/admin/contacaixa/{$item.id}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Editar</a>
+                    </td>
+                  </tr>
+                  {/foreach}
+                </tbody>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+  	</div>
+  </div>
+</section>
+<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+<script src="/res/admin/bootstrap/js/moment.min.js"></script>
+<script src="/res/admin/bootstrap/js/daterangepicker.js"></script>
+<script src="/res/admin/bootstrap/js/bootstrap-datepicker.min.js"></script>
+
+<script>
+  $(function () {
+
+})
+</script>
+

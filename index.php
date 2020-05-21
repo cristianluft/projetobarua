@@ -3,7 +3,9 @@
 require_once("vendor/autoload.php");
 require_once("class/Page.php");
 require_once("class/User.php");
-require_once("class/Faturamento.php");
+require_once("class/Movimentacao.php");
+require_once("class/Conta_Caixa.php");
+require_once("class/Categoria.php");
 
 session_start();
 
@@ -20,17 +22,42 @@ $app->get('/', function() { // Redireciona para o admin
 });
 
 $app->get('/admin', function() {  // Puxa Página inicial após login
-    
     User::verifyLogin();
     $page = new Page();
-    $fat = Faturamento::ticketMedio(30);
-    $page->assign('data',$fat);
+    //$fat = Faturamento::ticketMedio(30);
+    //$prat = Faturamento::numPratosMes();
+    $page->assign('data',0);
+    $page->assign('pratos',0);
+    //$page->assign('data',$fat[0]["tktmedio"]);
+    //$page->assign('pratos',$prat[0]["pratos"]);
     $page->setTpl('index.html');
 
 });
 
-$app->get('/admin/login', function() { // Puxa Página login
+$app->get('/admin/contacaixa/create', function() {  // Puxa Página inicial após login
     
+    User::verifyLogin();
+    $page = new Page();
+    $cat = Categoria::listar();
+    $page->assign('data',$cat);
+    $page->setTpl('contacaixa-create.html');
+
+});
+
+$app->get('/admin/contacaixa', function() {  // Puxa Página inicial após login
+    
+    User::verifyLogin();
+    $page = new Page();
+    $users = Conta_Caixa::listar();
+    $page->assign('data',$users);
+    $page->setTpl('contacaixa.html');
+
+});
+
+
+
+$app->get('/admin/login', function() { // Puxa Página login
+
     $page = new Page([
         "header"=>false,
         "footer"=>false
@@ -55,14 +82,14 @@ $app->get('/admin/usuarios/create', function() { // Puxa página criar novo usua
 
 });
 
-$app->get('/admin/faturamento/update', function() { // Puxa página criar novo usuario
+$app->get('/admin/movimentacao/update', function() { // Puxa página criar novo usuario
     User::verifyLogin();
     $page = new Page();
-    $page->setTpl('faturamento-update.html');
+    $page->setTpl('movimentacao-update.html');
 
 });
 
-$app->get('/admin/faturamento/relatorio', function() { // Puxa página faturamento relatorio
+$app->get('/admin/movimentacao/relatorio', function() { // Puxa página faturamento relatorio
     User::verifyLogin();
     $page = new Page();
     $page->setTpl('chartjs.html');
@@ -75,6 +102,16 @@ $app->get('/admin/usuarios/:id', function($id) { // Puxa página editar usuário
     $user = User::listarUsuariosById($id);
     $page->assign('data',$user);
     $page->setTpl('users-update.html');
+
+});
+
+$app->get('/admin/contacaixa/:id', function($id) { // Puxa página editar usuário
+    User::verifyLogin();
+    $page = new Page();
+    $cc = Conta_Caixa::listarContaCaixaById($id);
+    $page->assign('data',$cc);
+    $page->assign('data2',Categoria::listar());
+    $page->setTpl('contacaixa-update.html');
 
 });
 
@@ -93,35 +130,43 @@ $app->get('/admin/usuarios/:id/delete', function($id) { // Salva dados novo usua
     exit;
 });
 
-$app->get('/admin/faturamento/create', function() { // Puxa página para criar faturamento
+$app->get('/admin/movimentacao/create', function() { // Puxa página para criar faturamento
     
     User::verifyLogin();
 
     $page = new Page();
-    
-    $page->setTpl('faturamento-create.html');
+    $tipo = Conta_Caixa::listar();
+    $page->assign('data',$tipo);
+    $page->setTpl('movimentacao-create.html');
 
     exit;
 });
 
-$app->get('/admin/faturamento', function() { // Puxa página faturamento
+$app->get('/admin/movimentacao', function() { // Puxa página faturamento
     
     User::verifyLogin();
-
     $page = new Page();
-    $fat = Faturamento::listarFaturamento();
+    $fat = Movimentacao::listarMovimentacaoByData(date('d/m/Y'),date('d/m/Y'),"Todos","Todos");
+    $total = Movimentacao::totalFaturamentoByData(date('d/m/Y'),date('d/m/Y'),"Todos","Todos");
+    $tipo = Categoria::listar();
+    $desc = Conta_Caixa::listar();
+    $page->assign('data3',$desc);
+    $page->assign('data2',$tipo);
+    $page->assign('total',$total[0]['total']);
     $page->assign('data',$fat);
-    $page->setTpl('faturamento.html');
+    $page->setTpl('movimentacao.html');
 
     exit;
 });
 
-$app->get('/admin/faturamento/:id', function($id) { // Puxa página editar usuário
+
+
+$app->get('/admin/movimentacao/:id', function($id) { // Puxa página editar usuário
     User::verifyLogin();
     $page = new Page();
-    $fat = Faturamento::listarFaturamentoById($id);
+    $fat = Movimentacao::listarMovimentacaoById($id);
     $page->assign('data',$fat);
-    $page->setTpl('faturamento-update.html');
+    $page->setTpl('movimentacao-update.html');
 
 });
 
@@ -146,40 +191,64 @@ $app->post('/admin/login', function() { // Analisa login e redireciona
 
 });
 
-$app->post('/admin/faturamento/:id', function($id) { // Altera faturamento
+$app->post('/admin/contacaixa/create', function() {  // Puxa página para criar conta caixa
     
     User::verifyLogin();
-
-    $fat = new Faturamento();
-    
-    $fat->setId($id);
-    $fat->setValor($_POST["valor"]);
-    $fat->setPratos($_POST["pratos"]);
-    $fat->setData($_POST["data"]);
-
-	$fat->update();
-
-	header("Location: /admin/faturamento");
-
-	exit;
+    $cc = new Conta_Caixa();
+    $cc->setNome($_POST["nome"]);
+    $cc->setIdCategoria(Categoria::getIdByDescricao($_POST["idcategoria"])['id']);
+    $cc->save();
+    header("Location: /admin/contacaixa");
+    exit;
 
 });
 
-$app->post('/admin/faturamento/create', function() { // Puxa página para criar faturamento
+$app->post('/admin/movimentacao/create', function() { // Puxa página para criar movimentacao
     
     User::verifyLogin();
 
-    $fat = new Faturamento();
-    
-    $fat->setValor($_POST["valor"]);
-    $fat->setPratos($_POST["pratos"]);
-    $fat->setData($_POST["data"]);
-
+    $fat = new Movimentacao();
+    $fat->setValor(str_replace(",",".",str_replace(".","",$_POST["valor"])));
+    $fat->setIdcc(Conta_Caixa::getDataByNome($_POST["idcc"])[0]['id']);
+    $fat->setData(Movimentacao::getDateForDatabase(str_replace("/","-",$_POST["data"])));
     $fat->save();
-
 	header("Location: /admin");
 
     exit;
+});
+
+$app->post('/admin/movimentacao', function() { // Analisa login e redireciona
+    $page = new Page();
+    $periodo = $_POST["date"];
+    $periodo = explode("-",$periodo);
+    $fat = Movimentacao::listarMovimentacaoByDataFiltered($periodo[0],$periodo[1],$_POST["cat"],$_POST["desc"]);
+    $total = Movimentacao::totalFaturamentoByData($periodo[0],$periodo[1],$_POST["cat"],$_POST["desc"]);
+    $page->assign('data2',Categoria::listar());
+    $page->assign('data3',Conta_Caixa::listar());
+    $page->assign('total',$total[0]['total']);
+    $page->assign('data',$fat);
+    $page->setTpl('movimentacao.html');
+
+});
+
+$app->post('/admin/movimentacao/:id', function($id) { // Altera faturamento
+    
+    User::verifyLogin();
+
+    $fat = new Movimentacao();
+    
+    
+    $fat->setId($id);
+    $fat->setValor(str_replace(",",".",str_replace(".","",$_POST["valor"])));
+    $fat->setIdcc(Conta_Caixa::getDataByNome($_POST["idcc"])[0]['id']);
+    $fat->setData(Movimentacao::getDateForDatabase(str_replace("/","-",$_POST["data"])));
+
+	$fat->update();
+
+	header("Location: /admin/movimentacao");
+
+	exit;
+
 });
 
 
@@ -225,6 +294,23 @@ $app->post('/admin/usuarios/:id', function($id) { // Altera dados usuario
 	$user->update();
 
 	header("Location: /admin/usuarios");
+
+	exit;
+
+});
+
+$app->post('/admin/contacaixa/:id', function($id) { // Altera dados usuario
+    
+    User::verifyLogin();
+
+	$cc = new Conta_Caixa();
+
+    $cc->setId($id);
+    $cc->setNome($_POST["nome"]);
+    $cc->setIdCategoria(Categoria::getIdByDescricao($_POST["idcategoria"])['id']);
+	$cc->update();
+
+	header("Location: /admin/contacaixa");
 
 	exit;
 

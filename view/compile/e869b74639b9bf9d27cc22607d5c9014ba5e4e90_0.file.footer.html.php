@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.36, created on 2020-05-14 05:09:38
+/* Smarty version 3.1.36, created on 2020-05-16 19:54:32
   from 'C:\xampp\htdocs\projetobarua\view\footer.html' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.36',
-  'unifunc' => 'content_5ebcb672471bf2_02256252',
+  'unifunc' => 'content_5ec028d8f01019_55442757',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'e869b74639b9bf9d27cc22607d5c9014ba5e4e90' => 
     array (
       0 => 'C:\\xampp\\htdocs\\projetobarua\\view\\footer.html',
-      1 => 1589210298,
+      1 => 1589651670,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ebcb672471bf2_02256252 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ec028d8f01019_55442757 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!-- Main Footer -->
 <footer class="main-footer">
     <!-- To the right -->
@@ -112,10 +112,9 @@ function content_5ebcb672471bf2_02256252 (Smarty_Internal_Template $_smarty_tpl)
 
 <!-- REQUIRED JS SCRIPTS -->
 
-<!-- jQuery 2.2.3 -->
-<?php echo '<script'; ?>
+<!--<?php echo '<script'; ?>
  src="/res/admin/plugins/jQuery/jquery-2.2.3.min.js"><?php echo '</script'; ?>
->
+> -->
 <!-- Bootstrap 3.3.6 -->
 <?php echo '<script'; ?>
  src="/res/admin/bootstrap/js/bootstrap.min.js"><?php echo '</script'; ?>

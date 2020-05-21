@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.36, created on 2020-05-15 16:26:19
+/* Smarty version 3.1.36, created on 2020-05-21 02:41:25
   from 'C:\xampp\htdocs\projetobarua\view\users-create.html' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.36',
-  'unifunc' => 'content_5ebea68b8105d9_86803126',
+  'unifunc' => 'content_5ec5ce3593a3a2_56864311',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '87075d4ee121edd4f0f879b8ea4a993649ee67c6' => 
     array (
       0 => 'C:\\xampp\\htdocs\\projetobarua\\view\\users-create.html',
-      1 => 1589552645,
+      1 => 1590021661,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ebea68b8105d9_86803126 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ec5ce3593a3a2_56864311 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 <!-- Content Header (Page header) -->
@@ -50,15 +50,15 @@ function content_5ebea68b8105d9_86803126 (Smarty_Internal_Template $_smarty_tpl)
           <div class="box-body">
             <div class="form-group">
               <label for="desperson">Nome</label>
-              <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite o nome">
+              <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite o nome" required>
             </div>
             <div class="form-group">
               <label for="deslogin">Login</label>
-              <input type="text" class="form-control" id="login" name="login" placeholder="Digite o login">
+              <input type="text" class="form-control" id="login" name="login" placeholder="Digite o login" required>
             </div>
             <div class="form-group">
               <label for="despassword">Senha</label>
-              <input type="password" class="form-control" id="senha" name="senha" placeholder="Digite a senha">
+              <input type="password" class="form-control" id="senha" name="senha" placeholder="Digite a senha" required>
             </div>
             <div class="checkbox">
               <label>

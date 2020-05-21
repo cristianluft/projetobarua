@@ -1,0 +1,80 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    Movimentação
+  </h1>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+  <div class="row">
+  	<div class="col-md-12">
+  		<div class="box box-primary">
+        <div class="box-header with-border">
+          <h3 class="box-title">Editar Movimentação</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        {foreach $data as $item}
+        <form role="form" action="/admin/movimentacao/{$item.id}" method="post">
+          <div class="box-body">
+            <div class="form-group">
+              <label for="lblvalor">Valor</label>
+              <input type="text" class="form-control" id="valor" name="valor" placeholder="Digite o valor" value="{$item.valor|number_format:2:",":"."}" required>
+            </div>
+            <div class="form-group">
+              <label>Conta Caixa</label>
+              <select class="form-control" name="idcc" required>
+                {foreach from=$data item=item key=key}
+                <option>{$item.nome}</option>
+                {/foreach}
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Data:</label>
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <i class="fa fa-calendar"></i>
+                </div>
+                <input name="data" type="text" id="datemask" value="{$item.dataformatada}" class="form-control" data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;" data-mask="" required>
+              </div>
+              <!-- /.input group -->
+          </div>
+          </div>
+          <!-- /.box-body -->
+          <div class="box-footer">
+            <button type="submit" class="btn btn-primary">Salvar</button>
+          </div>
+        </form>
+        {/foreach}
+      </div>
+  	</div>
+  </div>
+
+</section>
+<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+<script src="/res/admin/bootstrap/js/jquery.inputmask.js"></script>
+<script src="/res/admin/bootstrap/js/jquery.inputmask.date.extensions.js"></script>
+<script src="/res/admin/bootstrap/js/jquery.inputmask.extensions.js"></script>
+<script src="/res/admin/bootstrap/js/jquery.maskMoney.js" type="text/javascript"></script>
+
+<script>
+  $(function () {
+    //jQuery.noConflict();
+    //noConflict();
+    $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' });
+   // {literal}
+    $('#valor').maskMoney({thousands:'.', decimal:',', symbolStay: true});
+   // {/literal}
+    jQuery.noConflict();
+
+  })
+
+  
+</script>

@@ -3,13 +3,8 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    Lista de Usuários
+    Contas Caixa
   </h1>
-  <ol class="breadcrumb">
-    <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
-    <li><a href="/admin/users">Usuários</a></li>
-    <li class="active"><a href="/admin/users/create">Cadastrar</a></li>
-  </ol>
 </section>
 
 <!-- Main content -->
@@ -19,28 +14,25 @@
   	<div class="col-md-12">
   		<div class="box box-success">
         <div class="box-header with-border">
-          <h3 class="box-title">Novo Usuário</h3>
+          <h3 class="box-title">Nova Conta Caixa</h3>
         </div>
         <!-- /.box-header -->
         <!-- form start -->
-        <form role="form" action="/admin/usuarios/create" method="post">
+        <form role="form" action="/admin/contacaixa/create" method="post">
           <div class="box-body">
             <div class="form-group">
               <label for="desperson">Nome</label>
               <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite o nome" required>
             </div>
+            
             <div class="form-group">
-              <label for="deslogin">Login</label>
-              <input type="text" class="form-control" id="login" name="login" placeholder="Digite o login" required>
-            </div>
-            <div class="form-group">
-              <label for="despassword">Senha</label>
-              <input type="password" class="form-control" id="senha" name="senha" placeholder="Digite a senha" required>
-            </div>
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" name="ativo" value="1"> Acesso de Administrador
-              </label>
+              <label>Categoria</label>
+              
+              <select class="form-control" name="idcategoria" required>
+                {foreach from=$data item=item key=key}
+                <option>{$item.descricao}</option>
+                {/foreach}
+              </select>
             </div>
           </div>
           <!-- /.box-body -->

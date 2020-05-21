@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.36, created on 2020-05-16 01:34:23
+/* Smarty version 3.1.36, created on 2020-05-19 22:38:20
   from 'C:\xampp\htdocs\projetobarua\view\header.html' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.36',
-  'unifunc' => 'content_5ebf26ff30cea4_05548604',
+  'unifunc' => 'content_5ec443bca10cc6_24958625',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0a05db8f3d9aa269b0f40d006796890357ec316f' => 
     array (
       0 => 'C:\\xampp\\htdocs\\projetobarua\\view\\header.html',
-      1 => 1589585637,
+      1 => 1589920699,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ebf26ff30cea4_05548604 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ec443bca10cc6_24958625 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
@@ -33,6 +33,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <title>Restaurante Baruã</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <?php echo '<script'; ?>
+ src="/res/admin/plugins/jQuery/jquery-2.2.3.min.js"><?php echo '</script'; ?>
+>
+  <link rel="stylesheet" href="/res/admin/bootstrap/css/bootstrap-datepicker.min.css">
+  <link rel="stylesheet" href="/res/admin/bootstrap/css/daterangepicker.css">
+  <link rel="stylesheet" href="/res/admin/bootstrap/css/all.css">
   <!-- Bootstrap 3.3.6 -->
   <link rel="stylesheet" href="/res/admin/bootstrap/css/bootstrap.min.css">
   <!-- Font Awesome -->
@@ -45,7 +51,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect.
   -->
-  <link rel="stylesheet" href="/res/admin/dist/css/skins/skin-blue.min.css">
+  <link rel="stylesheet" href="/res/admin/dist/css/skins/skin-yellow.min.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -78,14 +84,14 @@ desired effect
 |               | sidebar-mini                            |
 |---------------------------------------------------------|
 -->
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-yellow sidebar-mini">
 <div class="wrapper">
 
   <!-- Main Header -->
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="/admin/login" class="logo">
+    <a href="/admin" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>R</b>BR</span>
       <!-- logo for regular state and mobile devices -->
@@ -157,32 +163,26 @@ desired effect
       <ul class="sidebar-menu">
         <li class="header">Menu</li>
         <!-- Optionally, you can add icons to the links -->
-        <li class="active"><a href="/admin/usuarios"><i class="fa fa-link"></i> <span>Usuarios</span></a></li>
-        <!--<li><a href="/admin/relatorio" ><i class="fa fa-link"></i> <span>Cardápios</span></a></li>-->
+        <li><a href="/admin"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+
+        <li><a href="/admin/usuarios"><i class="fa fa-users"></i> <span>Usuarios</span></a></li>
+
+        <li><a href="/admin/cardapios"><i class="fa fa-cutlery"></i> <span>Cardápios</span></a></li>
+
         <li class="treeview">
-          <a href="/admin/cardapios"><i class="fa fa-link"></i> <span>Cardápios</span>
+          <a href="/admin/movimentacao"><i class="fa fa-money"></i> <span>Movimentação</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="/admin/cardapios/create">Adicionar</a></li>
-            <li><a href="/admin/cardapios/update">Editar</a></li>
-            <li><a href="/admin/cardapios">Listar</a></li>
+            <li><a href="/admin/movimentacao/create">Adicionar</a></li>
+            <li><a href="/admin/movimentacao">Listar</a></li>
           </ul>
         </li>
-        <li class="treeview">
-          <a href="/admin/faturamento"><i class="fa fa-link"></i> <span>Faturamento</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="/admin/faturamento/create">Adicionar</a></li>
-            <li><a href="/admin/faturamento">Listar</a></li>
-            <li><a href="/admin/faturamento/relatorio">Relatório</a></li>
-          </ul>
-        </li>
+
+        <li><a href="/admin/contacaixa"><i class="fa fa-cog"></i> <span>Contas Caixa</span></a></li>
+
       </ul>
       <!-- /.sidebar-menu -->
     </section>
