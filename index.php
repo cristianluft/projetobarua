@@ -161,8 +161,12 @@ $app->get('/admin/movimentacao', function() { // Puxa página faturamento
     $desc = Conta_Caixa::listar();
     $page->assign('data3',$desc);
     $page->assign('data2',$tipo);
-    $page->assign('total',$total[0]['total']);
-    $page->assign('data',$fat);
+    if(isset($total)) {
+        $page->assign('total',$total[0]['total']);
+    }
+    if(isset($fat)) {
+        $page->assign('data',$fat);
+    }
     $page->setTpl('movimentacao.html');
 
     exit;
