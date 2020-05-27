@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.36, created on 2020-05-21 02:40:04
+/* Smarty version 3.1.36, created on 2020-05-22 05:17:33
   from 'C:\xampp\htdocs\projetobarua\view\movimentacao-update.html' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.36',
-  'unifunc' => 'content_5ec5cde493dc14_02017782',
+  'unifunc' => 'content_5ec7444d0123e9_31686064',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '347d322c62a73f3ba9a2f5d314057efdce13e8e2' => 
     array (
       0 => 'C:\\xampp\\htdocs\\projetobarua\\view\\movimentacao-update.html',
-      1 => 1590021590,
+      1 => 1590117427,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ec5cde493dc14_02017782 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ec7444d0123e9_31686064 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 <!-- Content Header (Page header) -->
@@ -50,6 +50,11 @@ $_smarty_tpl->tpl_vars['item']->do_else = false;
         <form role="form" action="/admin/movimentacao/<?php echo $_smarty_tpl->tpl_vars['item']->value['id'];?>
 " method="post">
           <div class="box-body">
+            <div class="form-group">
+              <label>Observação</label>
+              <textarea class="form-control" id="textarea"  name="obs" rows="3" placeholder="Digite aqui a observação"><?php echo $_smarty_tpl->tpl_vars['item']->value['obs'];?>
+</textarea>
+            </div>
             <div class="form-group">
               <label for="lblvalor">Valor</label>
               <input type="text" class="form-control" id="valor" name="valor" placeholder="Digite o valor" value="<?php echo number_format($_smarty_tpl->tpl_vars['item']->value['valor'],2,",",".");?>

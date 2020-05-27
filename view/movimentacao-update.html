@@ -22,6 +22,10 @@
         <form role="form" action="/admin/movimentacao/{$item.id}" method="post">
           <div class="box-body">
             <div class="form-group">
+              <label>Observação</label>
+              <textarea class="form-control" id="textarea"  name="obs" rows="3" placeholder="Digite aqui a observação">{$item.obs}</textarea>
+            </div>
+            <div class="form-group">
               <label for="lblvalor">Valor</label>
               <input type="text" class="form-control" id="valor" name="valor" placeholder="Digite o valor" value="{$item.valor|number_format:2:",":"."}" required>
             </div>

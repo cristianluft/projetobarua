@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.36, created on 2020-05-21 02:20:59
+/* Smarty version 3.1.36, created on 2020-05-22 04:58:30
   from 'C:\xampp\htdocs\projetobarua\view\movimentacao-create.html' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.36',
-  'unifunc' => 'content_5ec5c96bae7075_03437400',
+  'unifunc' => 'content_5ec73fd65f4486_18713970',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'c384d93399084761d9cf2666001daa5fb4637726' => 
     array (
       0 => 'C:\\xampp\\htdocs\\projetobarua\\view\\movimentacao-create.html',
-      1 => 1590020432,
+      1 => 1590116305,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ec5c96bae7075_03437400 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ec73fd65f4486_18713970 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 <!-- Content Header (Page header) -->
@@ -48,6 +48,10 @@ function content_5ec5c96bae7075_03437400 (Smarty_Internal_Template $_smarty_tpl)
         <!-- form start -->
         <form role="form" action="/admin/movimentacao/create" method="post">
           <div class="box-body">
+            <div class="form-group">
+              <label>Observação</label>
+              <textarea class="form-control" name="obs" rows="3" placeholder="Digite aqui a observação"></textarea>
+            </div>
             <div class="form-group">
               <label for="lblvalor">Valor</label>
               <input type="text" class="form-control" id="valor" name="valor" placeholder="Digite o valor" required>

@@ -63,6 +63,7 @@
                 <thead>
                   <tr>
                     <th style="width: 80px">#</th>
+                    <th>Observação</th>
                     <th>Descrição</th>
                     <th>Valor</th>
                     <th>Tipo</th>
@@ -74,6 +75,7 @@
                   {foreach from=$data item=item key=key}
                   <tr>
                     <td>{$item.id}</td>
+                    <td>{$item.obs}</td>
                     <td>{$item.nome}</td>
                     <td>{$item.valor|number_format:2:",":"."}</td>
                     <td>{$item.descricao}</td>

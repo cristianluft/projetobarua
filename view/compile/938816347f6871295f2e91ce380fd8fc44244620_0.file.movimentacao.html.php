@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.36, created on 2020-05-20 17:54:00
+/* Smarty version 3.1.36, created on 2020-05-22 04:54:31
   from 'C:\xampp\htdocs\projetobarua\view\movimentacao.html' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.36',
-  'unifunc' => 'content_5ec5529816e968_90249822',
+  'unifunc' => 'content_5ec73ee7b79bb9_77850172',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '938816347f6871295f2e91ce380fd8fc44244620' => 
     array (
       0 => 'C:\\xampp\\htdocs\\projetobarua\\view\\movimentacao.html',
-      1 => 1589990038,
+      1 => 1590115805,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ec5529816e968_90249822 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ec73ee7b79bb9_77850172 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 
 
@@ -102,6 +102,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                 <thead>
                   <tr>
                     <th style="width: 80px">#</th>
+                    <th>Observação</th>
                     <th>Descrição</th>
                     <th>Valor</th>
                     <th>Tipo</th>
@@ -118,6 +119,8 @@ $_smarty_tpl->tpl_vars['item']->do_else = false;
 ?>
                   <tr>
                     <td><?php echo $_smarty_tpl->tpl_vars['item']->value['id'];?>
+</td>
+                    <td><?php echo $_smarty_tpl->tpl_vars['item']->value['obs'];?>
 </td>
                     <td><?php echo $_smarty_tpl->tpl_vars['item']->value['nome'];?>
 </td>

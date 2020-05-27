@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.36, created on 2020-05-15 04:28:57
+/* Smarty version 3.1.36, created on 2020-05-22 19:28:56
   from 'C:\xampp\htdocs\projetobarua\view\users-update.html' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.36',
-  'unifunc' => 'content_5ebdfe6993f510_23690663',
+  'unifunc' => 'content_5ec80bd83d6ad0_35404201',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '4cf3b39161fdffb17487eae7953fe7b723c61f2e' => 
     array (
       0 => 'C:\\xampp\\htdocs\\projetobarua\\view\\users-update.html',
-      1 => 1589509731,
+      1 => 1590021680,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ebdfe6993f510_23690663 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ec80bd83d6ad0_35404201 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 <!-- Content Header (Page header) -->
@@ -53,12 +53,12 @@ $_smarty_tpl->tpl_vars['item']->do_else = false;
             <div class="form-group">
               <label for="desperson">Nome</label>
               <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite o nome" value="<?php echo $_smarty_tpl->tpl_vars['item']->value['nome'];?>
-">
+" required>
             </div>
             <div class="form-group">
               <label for="deslogin">Login</label>
               <input type="text" class="form-control" id="login" name="login" placeholder="Digite o login"  value="<?php echo $_smarty_tpl->tpl_vars['item']->value['login'];?>
-">
+" required>
             </div>
             <div class="checkbox">
               <label>

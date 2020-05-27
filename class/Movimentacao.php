@@ -5,6 +5,7 @@ require_once("class/DB/Sql.php");
 class Movimentacao {
 
     private $id;
+    private $obs;
     private $valor;
     private $data;
     private $idcc;
@@ -12,7 +13,8 @@ class Movimentacao {
     public function save() {
 
         $sql = new Sql();
-       return  $sql->select("INSERT INTO movimentacao(valor,data,idcc) VALUES (:valor,:data,:idcc); ",array(
+       return  $sql->select("INSERT INTO movimentacao(obs,valor,data,idcc) VALUES (:obs,:valor,:data,:idcc); ",array(
+            ":obs"=>$this->getObs(),
             ":valor"=>$this->getValor(),
             ":idcc"=>$this->getIdcc(),
             ":data"=>$this->getData()
@@ -23,8 +25,9 @@ class Movimentacao {
     public function update() {
 
         $sql = new Sql();
-        $sql->query("UPDATE movimentacao SET idcc = :idcc, valor = :valor, data = :data WHERE id = :id  ",array(
+        $sql->query("UPDATE movimentacao SET obs = :obs, idcc = :idcc, valor = :valor, data = :data WHERE id = :id  ",array(
             ":id"=>$this->getId(),
+            ":obs"=>$this->getObs(),
             ":idcc"=>$this->getIdcc(),
             ":valor"=>$this->getValor(),
             ":data"=>$this->getData()
@@ -41,7 +44,7 @@ class Movimentacao {
     public static function listarMovimentacaoByData($inicio,$fim) {
         $sql = new Sql();
 
-        return $sql->select("SELECT mv.id,cc.nome,mv.valor,cat.descricao,DATE_FORMAT(mv.data,'%d/%m/%Y') AS dataformatada FROM `movimentacao` as mv INNER JOIN conta_caixa as cc ON mv.idcc = cc.id INNER JOIN categoria as cat ON cc.idcategoria = cat.id WHERE data BETWEEN STR_TO_DATE( :inicio, '%d/%m/%Y' ) AND STR_TO_DATE( :fim, '%d/%m/%Y' )",array(
+        return $sql->select("SELECT mv.obs,mv.id,cc.nome,mv.valor,cat.descricao,DATE_FORMAT(mv.data,'%d/%m/%Y') AS dataformatada FROM `movimentacao` as mv INNER JOIN conta_caixa as cc ON mv.idcc = cc.id INNER JOIN categoria as cat ON cc.idcategoria = cat.id WHERE data BETWEEN STR_TO_DATE( :inicio, '%d/%m/%Y' ) AND STR_TO_DATE( :fim, '%d/%m/%Y' )",array(
             ":inicio"=>$inicio,
             ":fim"=>$fim
         ));
@@ -52,31 +55,44 @@ class Movimentacao {
         $sql = new Sql();
         
         if($desc === "Todos" && $tipo !== "Todos") {
-            return $sql->select("SELECT mv.id,cc.nome,mv.valor,cat.descricao,DATE_FORMAT(mv.data,'%d/%m/%Y') AS dataformatada FROM `movimentacao` as mv INNER JOIN conta_caixa as cc ON mv.idcc = cc.id INNER JOIN categoria as cat ON cc.idcategoria = cat.id WHERE data BETWEEN STR_TO_DATE( :inicio, '%d/%m/%Y' ) AND STR_TO_DATE( :fim, '%d/%m/%Y' ) AND cc.nome = :nome",array(
+            return $sql->select("SELECT mv.obs,mv.id,cc.nome,mv.valor,cat.descricao,DATE_FORMAT(mv.data,'%d/%m/%Y') AS dataformatada FROM `movimentacao` as mv INNER JOIN conta_caixa as cc ON mv.idcc = cc.id INNER JOIN categoria as cat ON cc.idcategoria = cat.id WHERE data BETWEEN STR_TO_DATE( :inicio, '%d/%m/%Y' ) AND STR_TO_DATE( :fim, '%d/%m/%Y' ) AND cc.nome = :nome",array(
                 ":inicio"=>$inicio,
                 ":fim"=>$fim,
                 ":nome"=>$tipo
             ));
         }
         if($tipo === "Todos" && $desc !== "Todos"){
-            return $sql->select("SELECT mv.id,cc.nome,mv.valor,cat.descricao,DATE_FORMAT(mv.data,'%d/%m/%Y') AS dataformatada FROM `movimentacao` as mv INNER JOIN conta_caixa as cc ON mv.idcc = cc.id INNER JOIN categoria as cat ON cc.idcategoria = cat.id WHERE data BETWEEN STR_TO_DATE( :inicio, '%d/%m/%Y' ) AND STR_TO_DATE( :fim, '%d/%m/%Y' ) AND cat.descricao = :descricao",array(
+            return $sql->select("SELECT mv.obs,mv.id,cc.nome,mv.valor,cat.descricao,DATE_FORMAT(mv.data,'%d/%m/%Y') AS dataformatada FROM `movimentacao` as mv INNER JOIN conta_caixa as cc ON mv.idcc = cc.id INNER JOIN categoria as cat ON cc.idcategoria = cat.id WHERE data BETWEEN STR_TO_DATE( :inicio, '%d/%m/%Y' ) AND STR_TO_DATE( :fim, '%d/%m/%Y' ) AND cat.descricao = :descricao",array(
                 ":inicio"=>$inicio,
                 ":fim"=>$fim,
                 ":descricao"=>$desc
             ));
         }
         if($tipo === "Todos" && $desc === "Todos"){
-            return $sql->select("SELECT mv.id,cc.nome,mv.valor,cat.descricao,DATE_FORMAT(mv.data,'%d/%m/%Y') AS dataformatada FROM `movimentacao` as mv INNER JOIN conta_caixa as cc ON mv.idcc = cc.id INNER JOIN categoria as cat ON cc.idcategoria = cat.id WHERE data BETWEEN STR_TO_DATE( :inicio, '%d/%m/%Y' ) AND STR_TO_DATE( :fim, '%d/%m/%Y' )",array(
+            return $sql->select("SELECT mv.obs,mv.id,cc.nome,mv.valor,cat.descricao,DATE_FORMAT(mv.data,'%d/%m/%Y') AS dataformatada FROM `movimentacao` as mv INNER JOIN conta_caixa as cc ON mv.idcc = cc.id INNER JOIN categoria as cat ON cc.idcategoria = cat.id WHERE data BETWEEN STR_TO_DATE( :inicio, '%d/%m/%Y' ) AND STR_TO_DATE( :fim, '%d/%m/%Y' )",array(
                 ":inicio"=>$inicio,
                 ":fim"=>$fim
             ));
         }
-        
+        if($tipo !== "Todos" && $desc !== "Todos") {
+            return $sql->select("SELECT mv.obs,mv.id,cc.nome,mv.valor,cat.descricao,DATE_FORMAT(mv.data,'%d/%m/%Y') AS dataformatada FROM `movimentacao` as mv INNER JOIN conta_caixa as cc ON mv.idcc = cc.id INNER JOIN categoria as cat ON cc.idcategoria = cat.id WHERE data BETWEEN STR_TO_DATE( :inicio, '%d/%m/%Y' ) AND STR_TO_DATE( :fim, '%d/%m/%Y' ) AND cat.descricao = :descricao AND cc.nome = :nome",array(
+                ":inicio"=>$inicio,
+                ":fim"=>$fim,
+                ":descricao"=>$desc,
+                ":nome"=>$tipo
+            ));
+        } 
+    }
+
+    public static function testegrafico() {
+        $sql = new Sql();
+
+        $results =  $sql->select("SELECT mv.valor,DATE_FORMAT(mv.data,'%d/%m/%Y') AS dataformatada FROM `movimentacao` as mv INNER JOIN conta_caixa as cc ON mv.idcc = cc.id INNER JOIN categoria as cat ON cc.idcategoria = cat.id WHERE cc.nome = 'Faturamento Diário'");
+
+        return json_encode($results[0]);
     }
     
     public static function totalFaturamentoByData($inicio,$fim,$desc,$tipo) {
-        $sql = new Sql();
-
         $sql = new Sql();
         
         if($desc === "Todos" && $tipo !== "Todos") {
@@ -99,12 +115,20 @@ class Movimentacao {
                 ":fim"=>$fim
             ));
         }
+        if($tipo !== "Todos" && $desc !== "Todos") {
+            return $sql->select("SELECT SUM(mv.valor) as total,DATE_FORMAT(mv.data,'%d/%m/%Y') AS dataformatada FROM `movimentacao` as mv INNER JOIN conta_caixa as cc ON mv.idcc = cc.id INNER JOIN categoria as cat ON cc.idcategoria = cat.id WHERE data BETWEEN STR_TO_DATE( :inicio, '%d/%m/%Y' ) AND STR_TO_DATE( :fim, '%d/%m/%Y' ) AND cat.descricao = :descricao AND cc.nome = :nome",array(
+                ":inicio"=>$inicio,
+                ":fim"=>$fim,
+                ":descricao"=>$desc,
+                ":nome"=>$tipo
+            ));
+        } 
     }
 
     public static function listarMovimentacaoById($id) {
         $sql = new Sql();
 
-        return $sql->select("SELECT mv.id as id,cc.nome,mv.valor,DATE_FORMAT(mv.data,'%d/%m/%Y') AS dataformatada FROM `movimentacao` as mv INNER JOIN conta_caixa as cc ON mv.idcc = cc.id INNER JOIN categoria as cat ON cc.idcategoria = cat.id WHERE mv.id = :id",array(
+        return $sql->select("SELECT mv.id as id,cc.nome,mv.obs,mv.valor,DATE_FORMAT(mv.data,'%d/%m/%Y') AS dataformatada FROM `movimentacao` as mv INNER JOIN conta_caixa as cc ON mv.idcc = cc.id INNER JOIN categoria as cat ON cc.idcategoria = cat.id WHERE mv.id = :id",array(
             ":id"=>$id
         ));
     }
@@ -135,6 +159,10 @@ class Movimentacao {
         return $this->id;
     }
 
+    public function getObs() {
+        return $this->obs;
+    }
+
     public function getValor() {
         return $this->valor;
     }
@@ -149,6 +177,10 @@ class Movimentacao {
 
     public function setId($value) {
         $this->id = $value;
+    }
+
+    public function setObs($value) {
+        $this->obs = $value;
     }
 
     public function setValor($value) {

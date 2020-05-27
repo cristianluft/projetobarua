@@ -41,6 +41,18 @@ class Categoria{
         return $result[0];
     }
 
+    public static function getDescricaoById($id) {
+
+        $sql = new Sql();
+
+        $result =  $sql->select("SELECT descricao FROM `categoria` WHERE id = :id",array(
+            ":id"=>$id
+        ));
+
+        return $result[0];
+
+    }
+
 }
 
 ?>

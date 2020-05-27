@@ -54,6 +54,15 @@ $app->get('/admin/contacaixa', function() {  // Puxa Página inicial após login
 
 });
 
+$app->get('/admin/cardapios', function() {  // Puxa Página inicial após login
+    
+    User::verifyLogin();
+    $page = new Page();
+    $page->assign('data',Movimentacao::testegrafico());
+    $page->setTpl('chartjs.html');
+
+});
+
 
 
 $app->get('/admin/login', function() { // Puxa Página login
@@ -161,7 +170,7 @@ $app->get('/admin/movimentacao', function() { // Puxa página faturamento
 
 
 
-$app->get('/admin/movimentacao/:id', function($id) { // Puxa página editar usuário
+$app->get('/admin/movimentacao/:id', function($id) { // Puxa página editar movimentacao
     User::verifyLogin();
     $page = new Page();
     $fat = Movimentacao::listarMovimentacaoById($id);
@@ -206,9 +215,14 @@ $app->post('/admin/contacaixa/create', function() {  // Puxa página para criar 
 $app->post('/admin/movimentacao/create', function() { // Puxa página para criar movimentacao
     
     User::verifyLogin();
-
+    
     $fat = new Movimentacao();
-    $fat->setValor(str_replace(",",".",str_replace(".","",$_POST["valor"])));
+    $valor = str_replace(",",".",str_replace(".","",$_POST["valor"]));
+    if(Categoria::getDescricaoById(Conta_Caixa::getDataByNome($_POST["idcc"])[0]['idcategoria'])['descricao'] == "Despesa"){
+        $valor = ($valor*-1);
+    }
+    $fat->setObs($_POST["obs"]);
+    $fat->setValor($valor);
     $fat->setIdcc(Conta_Caixa::getDataByNome($_POST["idcc"])[0]['id']);
     $fat->setData(Movimentacao::getDateForDatabase(str_replace("/","-",$_POST["data"])));
     $fat->save();
@@ -217,7 +231,7 @@ $app->post('/admin/movimentacao/create', function() { // Puxa página para criar
     exit;
 });
 
-$app->post('/admin/movimentacao', function() { // Analisa login e redireciona
+$app->post('/admin/movimentacao', function() { // Puxa infos da movimentação
     $page = new Page();
     $periodo = $_POST["date"];
     $periodo = explode("-",$periodo);
@@ -231,7 +245,7 @@ $app->post('/admin/movimentacao', function() { // Analisa login e redireciona
 
 });
 
-$app->post('/admin/movimentacao/:id', function($id) { // Altera faturamento
+$app->post('/admin/movimentacao/:id', function($id) { // Altera movimentacao
     
     User::verifyLogin();
 
@@ -239,6 +253,7 @@ $app->post('/admin/movimentacao/:id', function($id) { // Altera faturamento
     
     
     $fat->setId($id);
+    $fat->setObs($_POST["obs"]);
     $fat->setValor(str_replace(",",".",str_replace(".","",$_POST["valor"])));
     $fat->setIdcc(Conta_Caixa::getDataByNome($_POST["idcc"])[0]['id']);
     $fat->setData(Movimentacao::getDateForDatabase(str_replace("/","-",$_POST["data"])));
