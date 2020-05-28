@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.36, created on 2020-05-27 04:11:28
+/* Smarty version 3.1.36, created on 2020-05-28 22:01:52
   from 'C:\xampp\htdocs\projetobarua\view\chartjs.html' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.36',
-  'unifunc' => 'content_5ecdcc5036ebe6_78016102',
+  'unifunc' => 'content_5ed018b0dc11b6_16436503',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '1774d1a670d30e402a9cb337337d62485de6b18c' => 
     array (
       0 => 'C:\\xampp\\htdocs\\projetobarua\\view\\chartjs.html',
-      1 => 1590256886,
+      1 => 1590598980,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ecdcc5036ebe6_78016102 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ed018b0dc11b6_16436503 (Smarty_Internal_Template $_smarty_tpl) {
 ?><link rel="stylesheet"
 href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 

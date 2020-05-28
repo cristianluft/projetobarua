@@ -161,12 +161,8 @@ $app->get('/admin/movimentacao', function() { // Puxa página faturamento
     $desc = Conta_Caixa::listar();
     $page->assign('data3',$desc);
     $page->assign('data2',$tipo);
-    if(isset($total)) {
-        $page->assign('total',$total[0]['total']);
-    }
-    if(isset($fat)) {
-        $page->assign('data',$fat);
-    }
+    $page->assign('total',$total[0]['total']);
+    $page->assign('data',$fat);
     $page->setTpl('movimentacao.html');
 
     exit;
@@ -178,7 +174,9 @@ $app->get('/admin/movimentacao/:id', function($id) { // Puxa página editar movi
     User::verifyLogin();
     $page = new Page();
     $fat = Movimentacao::listarMovimentacaoById($id);
+    $desc = Conta_Caixa::listar();
     $page->assign('data',$fat);
+    $page->assign('data2',$desc);
     $page->setTpl('movimentacao-update.html');
 
 });
@@ -254,11 +252,17 @@ $app->post('/admin/movimentacao/:id', function($id) { // Altera movimentacao
     User::verifyLogin();
 
     $fat = new Movimentacao();
-    
-    
+    $valor = str_replace(",",".",str_replace(".","",$_POST["valor"]));
+    if(Categoria::getDescricaoById(Conta_Caixa::getDataByNome($_POST["idcc"])[0]['idcategoria'])['descricao'] == "Despesa"){
+        $valor = ($valor*-1);
+    }else if(Categoria::getDescricaoById(Conta_Caixa::getDataByNome($_POST["idcc"])[0]['idcategoria'])['descricao'] == "Receita") {
+        if($valor < 0) {
+            $valor = ($valor*-1); 
+        }
+    }
     $fat->setId($id);
     $fat->setObs($_POST["obs"]);
-    $fat->setValor(str_replace(",",".",str_replace(".","",$_POST["valor"])));
+    $fat->setValor($valor);
     $fat->setIdcc(Conta_Caixa::getDataByNome($_POST["idcc"])[0]['id']);
     $fat->setData(Movimentacao::getDateForDatabase(str_replace("/","-",$_POST["data"])));
 

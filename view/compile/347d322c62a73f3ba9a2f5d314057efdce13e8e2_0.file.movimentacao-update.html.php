@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.36, created on 2020-05-22 05:17:33
+/* Smarty version 3.1.36, created on 2020-05-28 21:55:05
   from 'C:\xampp\htdocs\projetobarua\view\movimentacao-update.html' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.36',
-  'unifunc' => 'content_5ec7444d0123e9_31686064',
+  'unifunc' => 'content_5ed0171913a537_72438341',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '347d322c62a73f3ba9a2f5d314057efdce13e8e2' => 
     array (
       0 => 'C:\\xampp\\htdocs\\projetobarua\\view\\movimentacao-update.html',
-      1 => 1590117427,
+      1 => 1590695686,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ec7444d0123e9_31686064 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ed0171913a537_72438341 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 <!-- Content Header (Page header) -->
@@ -64,7 +64,7 @@ $_smarty_tpl->tpl_vars['item']->do_else = false;
               <label>Conta Caixa</label>
               <select class="form-control" name="idcc" required>
                 <?php
-$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['data']->value, 'item', false, 'key');
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['data2']->value, 'item', false, 'key');
 $_smarty_tpl->tpl_vars['item']->do_else = true;
 if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['key']->value => $_smarty_tpl->tpl_vars['item']->value) {
 $_smarty_tpl->tpl_vars['item']->do_else = false;
